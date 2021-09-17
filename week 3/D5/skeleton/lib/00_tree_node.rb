@@ -1,3 +1,5 @@
+require 'byebug'
+
 class PolyTreeNode
   attr_accessor :children, :value, :parent
   def initialize(value)
@@ -6,11 +8,14 @@ class PolyTreeNode
     @children = []
   end
 
-  def parent=(node)
-    if @parent.children == nil || !@parent.children.include?(self)
-      self.parent.children.delete(self)
-      @parent = node
-      @parent.children << self
+  def parent=(new_parent)
+    if !@parent.nil?
+      if !@parent.children.nil?
+        @parent.children.delete(self)
+      end
     end
+    @parent = new_parent
+    @parent.children << self unless new_parent.nil?
   end
+
 end
