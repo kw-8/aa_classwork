@@ -1,5 +1,6 @@
 module Stepable
   def moves
+    # includes king, pawn, knight with fixed steps
     case self.dir
     when "king_moves"
       king_steps

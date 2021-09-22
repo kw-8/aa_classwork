@@ -2,8 +2,10 @@ require "./pieces/piece"
 class Board
   attr_reader :grid
   def initialize
-    @grid = Array.new(8){Array.new(8)}
-    [0,1,6,7].each{|row| @grid[row] = Array.new(8){Piece.new()}}
+    @grid = Array.new(8){Array.new(8){NullPiece.new}}
+    [0,1,6,7].each do |row|
+      @grid[row] = (0..7).map{|col| Piece.new("white", self, [row, col])}
+    end
   end
 
   def [](pos)

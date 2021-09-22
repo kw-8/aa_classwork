@@ -1,6 +1,6 @@
 module Slideable
   def moves
-    # horizontal, diagonal, both, knight
+    # horizontal, diagonal, both
     case self.dir
     when "horizontal"
       horizontal_range
