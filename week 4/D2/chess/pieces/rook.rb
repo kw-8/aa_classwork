@@ -1,6 +1,6 @@
 require "./modules/slideable.rb"
-
-class Rook
+require_relative Piece
+class Rook < Piece
   extend Slideable
   def initialize(color, board, pos)
     super

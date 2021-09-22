@@ -8,8 +8,6 @@ module Slideable
       diagonal_range
     when "both"
       both_range
-    when "knight"
-      knight_range
     end
   end
 
@@ -44,14 +42,5 @@ module Slideable
 
   def both_range
     horizontal_range + diagonal_range
-  end
-
-  def knight_range
-    i,j = self.pos
-    all_spots = [ [i-1, j-2], [i-1, j+2],
-                  [i+1, j-2], [i+1, j+2],
-                  [i-2, j-1], [i-2, j+1],
-                  [i+2, j-1], [i+2, j+1]  ]
-    all_spots.select{|pos| self.board[pos].is_a?(NullPiece)}
   end
 end
