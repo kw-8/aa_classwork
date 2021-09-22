@@ -1,7 +1,7 @@
-require "./modules/slideable.rb"
-require_relative Piece
+require_relative "../modules/slideable.rb"
+require_relative "Piece"
 class Queen < Piece
-  extend Slideable
+  include Slideable
   def initialize(color, board, pos)
     super
     @dir = "both"

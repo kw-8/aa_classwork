@@ -1,11 +1,11 @@
-require "./pieces/piece"
+require_relative "./pieces/null_piece"
+require_relative "./pieces/pawn"
 class Board
   attr_reader :grid
   def initialize
-    @grid = Array.new(8){Array.new(8){NullPiece.new}}
-    [0,1,6,7].each do |row|
-      @grid[row] = (0..7).map{|col| Piece.new("white", self, [row, col])}
-    end
+    @grid = Array.new(8){Array.new(8){NullPiece.instance}}
+    @grid[1] = (0..7).map{|col| Pawn.new("W", self, [1, col])}
+    @grid[6] = (0..7).map{|col| Pawn.new("B", self, [6, col])}
   end
 
   def [](pos)
@@ -25,7 +25,7 @@ class Board
   end
 
   def valid_pos?(pos)
-    pos.all?{|i| i.between?(0..7)}
+    pos.all?{|i| i.between?(0,7)}
   end
 
   def add_piece(piece, pos)

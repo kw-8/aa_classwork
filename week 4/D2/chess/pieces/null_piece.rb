@@ -1,8 +1,8 @@
-require_relative Piece
+require_relative "piece"
 require 'singleton'
 
 class NullPiece < Piece
-  extend Singleton
+  include Singleton
 
   attr_reader :symbol, :color
   def initialize

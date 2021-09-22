@@ -1,7 +1,7 @@
-require "./modules/slideable.rb"
-require_relative Piece
+require_relative "../modules/stepable.rb"
+require_relative "piece"
 class Pawn < Piece
-  extend Slideable
+  include Stepable
   def initialize(color, board, pos)
     super
     @dir = "pawn_moves"
