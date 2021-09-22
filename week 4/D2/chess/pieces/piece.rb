@@ -1,8 +1,9 @@
 class Piece
-  attr_reader :board, :color, :dir
+  attr_reader :board, :color, :dir, :symbol
   attr_accessor :pos
   def initialize(color, board, pos)
-    @color, @board, @pos, @dir = color, board, pos, nil
+    @color, @board, @pos = color, board, pos
+    @dir, @symbol = nil, nil
   end
 
   def valid_moves # returns moves that are valid

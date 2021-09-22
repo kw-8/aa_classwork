@@ -1,11 +1,29 @@
 require_relative "./pieces/null_piece"
 require_relative "./pieces/pawn"
+require_relative "./pieces/queen"
+require_relative "./pieces/king"
+require_relative "./pieces/bishop"
+require_relative "./pieces/knight"
+require_relative "./pieces/rook"
 class Board
   attr_reader :grid
   def initialize
+    pawn_line = Proc.new do |row, color|
+      @grid[row] = (0..7).map{|col| Pawn.new(color, self, [row, col])}
+    end
+    back_line = Proc.new do |row, color|
+      [0,7].each{|col| @grid[row][col] = Rook.new(color, self, [row, col])}
+      [1,6].each{|col| @grid[row][col] = Knight.new(color, self, [row, col])}
+      [2,5].each{|col| @grid[row][col] = Bishop.new(color, self, [row, col])}
+      @grid[row][3] = King.new(color, self, [row, 3])
+      @grid[row][4] = Queen.new(color, self, [row, 4])
+    end
+
     @grid = Array.new(8){Array.new(8){NullPiece.instance}}
-    @grid[1] = (0..7).map{|col| Pawn.new("W", self, [1, col])}
-    @grid[6] = (0..7).map{|col| Pawn.new("B", self, [6, col])}
+    back_line.call(0, "w")
+    pawn_line.call(1, "w")
+    pawn_line.call(6, "b")
+    back_line.call(7, "b")
   end
 
   def [](pos)
@@ -50,5 +68,8 @@ class Board
   end
 
   def print_board
+    @grid.each do |row|
+      puts row.map{|pc| "#{pc.symbol}#{pc.color}"}.join(" ")
+    end
   end
 end

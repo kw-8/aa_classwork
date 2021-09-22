@@ -5,5 +5,6 @@ class Queen < Piece
   def initialize(color, board, pos)
     super
     @dir = "both"
+    @symbol = "Q"
   end
 end

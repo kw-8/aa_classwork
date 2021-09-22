@@ -5,5 +5,6 @@ class Rook < Piece
   def initialize(color, board, pos)
     super
     @dir = "horizontal"
+    @symbol = "r"
   end
 end

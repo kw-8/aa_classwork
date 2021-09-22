@@ -5,5 +5,6 @@ class King < Piece
   def initialize(color, board, pos)
     super
     @dir = "king_moves"
+    @symbol = "K"
   end
 end

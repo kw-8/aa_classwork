@@ -5,5 +5,6 @@ class Bishop < Piece
   def initialize(color, board, pos)
     super
     @dir = "diagonal"
+    @symbol = "b"
   end
 end

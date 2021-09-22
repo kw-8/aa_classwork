@@ -5,5 +5,6 @@ class Pawn < Piece
   def initialize(color, board, pos)
     super
     @dir = "pawn_moves"
+    @symbol = "p"
   end
 end
