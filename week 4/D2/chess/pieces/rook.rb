@@ -1,9 +1,9 @@
 require "./modules/slideable.rb"
 
-class Bishop < Piece
+class Rook
   extend Slideable
   def initialize(color, board, pos)
     super
-    @dir = "diagonal"
+    @dir = "horizontal"
   end
 end

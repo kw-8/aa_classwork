@@ -1,7 +1,7 @@
 module Slideable
   def moves
     # horizontal, diagonal, both, knight
-    case self.move_dirs
+    case self.dir
     when "horizontal"
       horizontal_range
     when "diagonal"
@@ -20,13 +20,13 @@ module Slideable
     arr_range.each.with_index do |pos, i|
       if pos == self.pos
         passed = true
-      elsif passed
-        self.board[pos].nil? ? range << pos : break
-      else  #not yet reached self.pos
-        self.board[pos].nil? ? range << pos : range = []
+      elsif passed #add until first piece
+        self.board[pos].is_a?(NullPiece) ? range << pos : break
+      else  #not yet reached self.pos; add or reset
+        self.board[pos].is_a?(NullPiece) ? range << pos : range = []
       end
     end
-  range
+    range
   end
 
   def horizontal_range
@@ -52,6 +52,6 @@ module Slideable
                   [i+1, j-2], [i+1, j+2],
                   [i-2, j-1], [i-2, j+1],
                   [i+2, j-1], [i+2, j+1]  ]
-    all_spots.select{|pos| self.board[pos].nil?}
+    all_spots.select{|pos| self.board[pos].is_a?(NullPiece)}
   end
 end

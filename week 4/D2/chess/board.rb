@@ -1,9 +1,9 @@
-require_relative "piece"
+require "./pieces/piece"
 class Board
   attr_reader :grid
   def initialize
     @grid = Array.new(8){Array.new(8)}
-    # [0,1,6,7].each{|row| @grid[row] = Array.new(8){Piece.new()}}
+    [0,1,6,7].each{|row| @grid[row] = Array.new(8){Piece.new()}}
   end
 
   def [](pos)
@@ -45,5 +45,8 @@ class Board
   end
 
   def move_piece!(color, start_pos, end_pos)
+  end
+
+  def print_board
   end
 end
