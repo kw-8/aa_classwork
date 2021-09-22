@@ -37,9 +37,16 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise "not valid move" if self[start_pos].nil? || !self[end_pos].nil?
-    self[end_pos] = self[start_pos]
-    self[start_pos] = nil
+    # make sure to 1) move a real piece
+    #              2) not eat own piece
+    #              3) valid move
+    raise "not a valid piece" if self[start_pos].is_a?(NullPiece)
+    raise "cannot eat your own piece" if (!self[end_pos].is_a?(NullPiece) && self[end_pos].color == self[start_pos].color)
+    raise "piece can't move that way" unless self[start_pos].valid_moves.include?(end_pos)
+
+    self[start_pos].pos = end_pos
+    self[end_pos].pos = nil
+    self[start_pos], self[end_pos] = NullPiece.instance, self[start_pos]
   end
 
   def valid_pos?(pos)
@@ -50,6 +57,8 @@ class Board
   end
 
   def checkmate?(color)
+    king = find_king(color) #king piece
+    king.valid_moves.all?{|pos| in_check?(pos)}
   end
 
   def in_check?(color)
@@ -61,10 +70,20 @@ class Board
   def pieces
   end
 
-  def dup
+  def move_piece!(color, start_pos, end_pos)
+    raise "move your own piece" unless self[start_pos].color == color
+    move_piece(start_pos, end_pos)
   end
 
-  def move_piece!(color, start_pos, end_pos)
+  def dup
+    new_board = Board.new
+    (0..7).each do |row|
+      (0..7).each do |col|
+        new_board.grid[[row, col]] = self[[row, col]].dup
+        new_board.grid[[row, col]].board = new_board
+      end
+    end
+    new_board
   end
 
   def print_board

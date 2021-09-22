@@ -18,19 +18,24 @@ module Slideable
     arr_range.each.with_index do |pos, i|
       if pos == self.pos
         passed = true
-      elsif passed #add until first piece
-        self.board[pos].is_a?(NullPiece) ? range << pos : break
+      elsif passed # next range
+        if self.board[pos].is_a?(NullPiece)
+          range << pos
+        else # eating enemy is allowed
+          range << pos unless self.board[pos].color == self.color
+          break
+        end
       else  #not yet reached self.pos; add or reset
-        self.board[pos].is_a?(NullPiece) ? range << pos : range = []
+        self.board[pos].is_a?(NullPiece) ? range << pos : range = [pos]
       end
     end
     range
   end
 
   def horizontal_range
-    i,j = self.pos
-    row = (0..7).map{|idx| [i,idx]}
-    col = (0..7).map{|idx| [idx,j]}
+    row,col = self.pos
+    row = (0..7).map{|i| [row,i]}
+    col = (0..7).map{|i| [i,col]}
     endpoints(row) + endpoints(col)
   end
 

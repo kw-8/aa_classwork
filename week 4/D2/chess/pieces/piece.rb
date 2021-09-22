@@ -9,4 +9,8 @@ class Piece
   def valid_moves # returns moves that are valid
     self.moves.select{|pos| self.board.valid_pos?(pos)}
   end
+
+  def print
+    puts symbol
+  end
 end
