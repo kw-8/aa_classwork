@@ -12,8 +12,3 @@ class Piece
     self.moves
   end
 end
-
-class NullPiece < Piece
-  def initialize
-  end
-end
