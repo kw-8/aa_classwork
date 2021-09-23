@@ -12,6 +12,32 @@ module Slideable
   end
 
   # private
+  def find_range(dir, pos)
+    i,j = dir
+    row,col = pos
+    if self.board[[row + i, col + j]].color == self.color
+      []
+    elsif self.board[[row + i, col + j]].color == " "
+      [[row + i, col + j]] + find_range(dir, [row + i, col + j])
+    else  # can eat opponent
+      [[row + i, col + j]]
+    end
+  end
+
+  def horizontal_range
+    find_range([1,0], self.pos) + find_range([0,1], self.pos)
+  end
+
+  def diagonal_range
+    find_range([1,1], self.pos) + find_range([1,-1], self.pos) + find_range([-1,1], self.pos) + find_range([-1,-1], self.pos)
+  end
+
+  def both_range
+    horizontal_range + diagonal_range
+  end
+end
+
+
   # def endpoints(arr_range)
   #   range = []
   #   passed = false
@@ -32,34 +58,3 @@ module Slideable
   #   end
   #   range
   # end
-
-  def horizontal_range
-    # p self.pos
-    find_range([1,0], self.pos) + find_range([0,1], self.pos)
-    # row = (0..7).map{|i| [row,i]}
-    # col = (0..7).map{|i| [i,col]}
-    # endpoints(row) + endpoints(col)
-  end
-
-  def diagonal_range
-    row,col = self.pos # need to get
-    left, right = [], []
-    endpoints(left) + endpoints(right)
-  end
-
-  def find_range(dir, pos)
-    i,j = dir
-    row,col = pos
-    if self.board[[row + i, col + j]].color == self.color
-      []
-    elsif self.board[[row + i, col + j]].color == " "
-      [[row + i, col + j]] + find_range(dir, [row + i, col + j])
-    else  # can eat opponent
-      [[row + i, col + j]]
-    end
-  end
-
-  def both_range
-    horizontal_range + diagonal_range
-  end
-end
