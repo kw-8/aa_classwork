@@ -43,6 +43,10 @@ class Board
     raise "not a valid piece" if self[start_pos].is_a?(NullPiece)
     raise "cannot eat your own piece" if (!self[end_pos].is_a?(NullPiece) && self[end_pos].color == self[start_pos].color)
     raise "piece can't move that way" unless self[start_pos].valid_moves.include?(end_pos)
+    
+    if self[start_pos].is_a?(Pawn)  # attacks a real piece OR valid steps
+      raise "pawn" unless (!self[end_pos].is_a?(NullPiece) && self[start_pos].pawn_attack.include?(end_pos)) || self[start_pos].pawn_steps.include?(end_pos)
+    end
 
     self[start_pos].pos = end_pos
     self[end_pos].pos = nil

@@ -5,10 +5,24 @@ module Stepable
     when "king_moves"
       king_steps
     when "pawn_moves"
-      pawn_steps
+      pawn_steps + pawn_attack
     when "knight_moves"
       knight_steps
     end
+  end
+
+  def pawn_attack
+    i,j = pos
+    range = [ [i-1, j-1], [i-1, j+1],
+              [i+1, j-1], [i+1, j+1] ]
+    available(range)
+  end
+
+  def pawn_steps
+    i,j = pos
+    range = [ [i-1, j],
+              [i+1, j] ]
+    available(range)
   end
 
   private
@@ -21,13 +35,6 @@ module Stepable
     range = [ [i-1, j-1], [i-1, j  ], [i-1, j+1],
               [i  , j-1],             [i  , j+1],
               [i+1, j-1], [i+1, j  ], [i+1, j+1] ]
-    available(range)
-  end
-
-  def pawn_steps
-    i,j = pos
-    range = [ [i-1, j-1], [i-1, j+1],
-              [i+1, j-1], [i+1, j+1] ]
     available(range)
   end
 
