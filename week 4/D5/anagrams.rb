@@ -3,6 +3,7 @@ def first_anagram?(first, second)
 end
 
 
+
 def second_anagram?(first, second)
   clone = first.dup
   second_clone = second.split("")
