@@ -47,7 +47,9 @@ def second_anagram?(first, second)
   second_clone = second.split("")
 
   clone.each_char do |char|
-    second_clone.delete_at(second_clone.index(char)) if second_clone.include?(char)
+    if second_clone.include?(char)
+      second_clone.delete_at(second_clone.index(char))
+    else false end
   end
 
   second_clone.join("") == ""
@@ -86,3 +88,50 @@ end
 p quick_sort([6,5,4,2,2,3,4,5,62, 9])
 puts third_anagram?("apple".split(""), "ppale".split(""))
 
+def fourth_anagram?(first, second)
+  hash1 = Hash.new(0)
+  hash2 = Hash.new(0)
+
+  first.each_char do |char|
+    hash1[char] += 1
+  end
+  second.each_char do |char|
+    hash2[char] += 1
+  end
+  hash1 == hash2
+end
+p fourth_anagram?("tea", "eeat")
+p fourth_anagram?("tea", "cat")
+p fourth_anagram?("tea", "eat")
+
+
+def bonus_anagram?(first, second)
+  hash1 = Hash.new(0)
+
+  first.each_char do |char|
+    hash1[char] += 1
+  end
+  second.each_char do |char|
+    hash1[char] -= 1
+  end
+  hash1.values.all?(0)
+end
+p bonus_anagram?("tea", "eeat")
+p bonus_anagram?("tea", "cat")
+p bonus_anagram?("tea", "eat")
+
+
+# first anagram
+# permutations is factorial, so first anagram which relies on it is factorial
+
+# second anagram
+# goes trhough every element in each and then goes through every element in
+# second_clone, so n^2
+
+# third anagram
+# uses quicksort: best case nlogn, worst case n^2, so third is also nlogn and
+# potentially n^2
+
+# fourth anagram
+# fourth and bonus are exactly the same, every case is O(n) because we go iterate
+# through the array a constant number of times
