@@ -1,14 +1,49 @@
 class Integer
   # Integer#hash already implemented for you
+  
 end
 
-class Array
-  def hash
+class Array #this function affects other problem sets (p03,04,05,etc)
+  def hash(n = nil)
+    n ||= 1
+    self.map.with_index do |ele, i|
+      if ele.is_a?(Array)
+        ele.hash(i + n)
+      else
+      i.hash + ele.hash
+      end
+    end.join("").to_i + n
+
+    # answer = []
+    # self.each.with_index do |ele, i|
+    #   if ele.is_a?(Array)
+    #     answer << ele.sum + i
+    #   else
+    #     answer << ele
+    #   end
+    # end
+    # answer.join("").to_i
+
   end
 end
 
 class String
   def hash
+    array = [1]
+    az = ('a'..'z').to_a + ('A'..'Z').to_a
+
+
+    self.each_char do |char|
+      i = az.index(char)
+      # p i
+      # p char
+      if i < 10
+        array << "0#{i}"
+      else
+        array << i
+      end
+    end
+    array.join("").to_i
   end
 end
 
