@@ -4,25 +4,25 @@ class Integer
 end
 
 class Array #this function affects other problem sets (p03,04,05,etc)
-  def hash(n = nil)
-    n ||= 1
-    self.map.with_index do |ele, i|
-      if ele.is_a?(Array)
-        ele.hash(i + n)
-      else
-      i.hash + ele.hash
-      end
-    end.join("").to_i + n
-
-    # answer = []
-    # self.each.with_index do |ele, i|
+  def hash#(n = nil)
+    #n ||= 1
+    # self.map.with_index do |ele, i|
     #   if ele.is_a?(Array)
-    #     answer << ele.sum + i
+    #     ele.hash(i + n)
     #   else
-    #     answer << ele
+    #   i.hash + ele.hash
     #   end
-    # end
-    # answer.join("").to_i
+    # end.join("").to_i + n
+
+    answer = []
+    self.each.with_index do |ele, i|
+      if ele.is_a?(Array)
+        answer << ele.sum + i
+      else
+        answer << ele
+      end
+    end
+    answer.join("").to_i
 
   end
 end
@@ -47,10 +47,19 @@ class String
   end
 end
 
+
 class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    arr = []
+    self.each do |key,value|
+      arr << (key.hash + value.hash)
+    end
+    arr.sum
+    # arr.sort!
+    # arr.map.with_index do |el, i|
+    #   el + i
+    # end
   end
 end
