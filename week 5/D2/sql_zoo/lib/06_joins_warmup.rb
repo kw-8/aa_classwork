@@ -96,16 +96,15 @@ def casablanca_cast
   execute(<<-SQL)
   SELECT actors.name
   FROM actors
-  JOIN (
-    SELECT *
+  JOIN 
+  (SELECT *
     FROM castings
     WHERE movie_id = (
       SELECT id
       FROM movies
-      WHERE title = 'Casablanca'
-    )
-  ) AS cast
-  ON actors.id = castings.actor_id;
+      WHERE title = 'Casablanca')
+  ) as abc
+  ON actors.id = abc.actor_id;
   
   SQL
 end
