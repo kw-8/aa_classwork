@@ -51,7 +51,8 @@ def group_population
   execute(<<-SQL)
   SELECT SUM(population)
   FROM countries
-  WHERE name = 'France' OR name = 'Germany' OR name = 'Spain';
+  WHERE name IN ('France','Germany','Spain');
+  --WHERE name = 'France' OR name = 'Germany' OR name = 'Spain';
   SQL
 end
 
