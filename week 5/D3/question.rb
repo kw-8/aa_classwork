@@ -23,6 +23,10 @@ class Question
     # self.new(question.first)
   end
 
+  def self.most_followed(n=1)
+    QuestionFollows.most_followed_questions(n)
+  end
+
   attr_reader :id, :title, :body, :users_id
   def initialize(hash)
     @id = hash['id']
@@ -42,10 +46,6 @@ class Question
 
   def followers 
     QuestionFollows.followers_for_question_id(self.id)
-  end
-
-  def self.most_followed(n=1)
-    QuestionFollows.most_followed_questions(n)
   end
 
 end

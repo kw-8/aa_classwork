@@ -4,11 +4,11 @@ class QuestionFollows
   def self.most_followed_questions(n)
     #fetches n most-followed questions
     questions = QuestionsDatabase.instance.execute(<<-SQL, n)
-    SELECT  questions_id
-    FROM    questions JOIN question_follows 
-            ON questions.id = question_follows.questions_id
-    GROUP BY  questions_id
-    ORDER BY  COUNT(question_follows.users_id) DESC 
+    SELECT questions_id
+    FROM questions JOIN question_follows 
+          ON questions.id = question_follows.questions_id
+    GROUP BY questions_id
+    ORDER BY COUNT(question_follows.users_id) DESC 
     LIMIT ?
     SQL
     # questions.map{|hash| hash['questions_id'].nil? ? {'questions_id' => 0} : hash } use somehting like this if left outer join
@@ -24,7 +24,6 @@ class QuestionFollows
     FROM question_follows
     WHERE relationships = ?
     SQL
-    #need to create an object
     
     question_follows.map{|follow_hash| self.new(follow_hash)}
   end
@@ -50,16 +49,12 @@ class QuestionFollows
   def self.followed_questions_for_user_id(usr_id)
     #returns an array of question objects
     questions = QuestionsDatabase.instance.execute(<<-SQL, usr_id)
-    SELECT 
-      questions_id
-    FROM
-    question_follows JOIN questions 
-    ON question_follows.users_id = questions.users_id
-    WHERE
-      question_follows.users_id = ?
+    SELECT  questions_id
+    FROM    question_follows JOIN questions 
+            ON question_follows.users_id = questions.users_id
+    WHERE   question_follows.users_id = ?
     SQL
 
     questions.map{|q_hash| Question.find_by_id(q_hash["questions_id"]) }
-
   end
 end

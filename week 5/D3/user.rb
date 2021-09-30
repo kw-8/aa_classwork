@@ -21,19 +21,19 @@ class Users
     self.new(users.first)
   end
 
+  attr_reader :id, :fname, :lname
+  def initialize(hash)
+    @id = hash['id']
+    @fname = hash['fname']
+    @lname = hash['lname']
+  end
+
   def authored_questions
     Question.find_by_author_id(self.id)
   end
 
   def authored_replies 
     Replies.find_by_user_id(self.id)
-  end
-
-  attr_reader :id, :fname, :lname
-  def initialize(hash)
-    @id = hash['id']
-    @fname = hash['fname']
-    @lname = hash['lname']
   end
 
   def followed_questions 
