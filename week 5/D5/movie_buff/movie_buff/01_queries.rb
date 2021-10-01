@@ -43,11 +43,11 @@ def biggest_cast
   #
   # Find the id and title of the 3 movies with the
   # largest casts (i.e most actors)
-
+  
   Movie
     .select(:id, :title)
     .joins(:actors)
-    .group(:movie_id)
+    .group(:id, :title) # want group to match select args except aggregates!!!
     .order('COUNT(actor_id) DESC')
     .limit(3)
 
@@ -65,6 +65,18 @@ def directed_by_one_of(them)
   # Movie.where(yr: years)
   #
   # Find the id and title of all the movies directed by one of 'them'.
+  # ['George Lucas', 'Steven Spielberg']
+  Movie
+  .select(:id, :title)
+  .joins(:director)
+  .where(actors: {name: them}) #('actors.name IN (?)', them)
+
+
+  # execute(<<-SQL, them)
+  # SELECT id, title
+  # FROM movies JOIN actors ON movies.director_id = actors.id
+  # WHERE actors.name IN them;
+  # SQL
 
 end
 
