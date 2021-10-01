@@ -20,14 +20,15 @@ class Course < ApplicationRecord
     through: :enrollments,
     source: :user
 
-  has_one :prerequisite_courses,
+  belongs_to :prerequisite_courses,
     class_name: 'Course',
     primary_key: :id,
     foreign_key: :prereq_id
-
-  has_one :instructor,
+    
+  # foreign key prereq_id -> course belongs to instructor
+  belongs_to :instructor,
     class_name: 'User',
-    primary_key: :instructor_id,
-    foreign_key: :id
+    primary_key: :id,
+    foreign_key: :instructor_id
 
 end
