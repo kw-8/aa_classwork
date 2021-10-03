@@ -23,8 +23,8 @@ def harrison_ford
   Actor
     .joins(:movies)
     .where(actors: { name: 'Harrison Ford' })
-    .where('castings.ord > 1')
-    .select("movies.id, movies.title")
+    .where('castings.ord > 1') #.where.not(castings: {ord: (1)})
+    .select("movies.id, movies.title")               #     [1]
 end
 
     
@@ -91,5 +91,7 @@ def movie_names_before_1940
   # improve performace for larger queries.
   #
   # Use pluck to find the title of all movies made before 1940.
-
+  Movie
+    .where('yr < 1940')
+    .pluck(:title)
 end
