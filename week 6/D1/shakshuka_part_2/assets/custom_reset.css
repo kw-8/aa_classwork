@@ -1,0 +1,13 @@
+body, head, section, footer, nav, aside, form, figure, title, h1, h2, ol, ul, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+img {
+  width: 100%;
+}
