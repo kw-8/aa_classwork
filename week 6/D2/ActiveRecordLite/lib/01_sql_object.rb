@@ -5,18 +5,26 @@ require 'active_support/inflector'
 
 class SQLObject
   def self.columns
-    # ...
+    # include col names    HATES STRING INTERP
+    cols = DBConnection.execute2(<<-SQL)
+      SELECT *
+      FROM #{table_name}
+      LIMIT 0
+    SQL
+    # returns array: col_name_str, hashes
+    cols.first.map(&:to_sym)
   end
 
   def self.finalize!
   end
 
-  def self.table_name=(table_name)
-    # ...
+  def self.table_name=(value)
+    @table_name = value
   end
 
   def self.table_name
-    # ...
+    # creates table; not instance method
+    @table_name ||= self.name.tableize
   end
 
   def self.all
@@ -37,6 +45,7 @@ class SQLObject
 
   def attributes
     # ...
+    @attributes ||= {}
   end
 
   def attribute_values
