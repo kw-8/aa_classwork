@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     def create
       user = User.new(user_params) #:user here is the name of the hash. So we need to pass in our values as user[:name]
       if user.save
-        redirect_to user_url(params[:id])
+        render json: user # redirect_to user_url(params[:id])
       else
         render json: user.errors.full_messages, status: :unprocessable_entity
       end
@@ -35,6 +35,8 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :email)
+      # user - name of hash
+      # params - possible keys (variable/col)
+      params.require(:user).permit(:username)
     end
 end
