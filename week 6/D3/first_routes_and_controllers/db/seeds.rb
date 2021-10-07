@@ -65,3 +65,47 @@ artworks = Artwork.create([
   }
 
 ])
+
+#artwork_id, viewer_id
+shares = ArtworkShare.create([
+    
+    { artwork_id:1, viewer_id:2 },
+    { artwork_id:1, viewer_id:3 },
+    { artwork_id:1, viewer_id:4 },
+    { artwork_id:1, viewer_id:5 },
+    { artwork_id:1, viewer_id:6 },
+    { artwork_id:1, viewer_id:7 },
+    { artwork_id:2, viewer_id:7 },
+    { artwork_id:2, viewer_id:2 },
+    { artwork_id:2, viewer_id:3 },
+    { artwork_id:2, viewer_id:4 },
+    { artwork_id:2, viewer_id:5 },
+    { artwork_id:2, viewer_id:6 },
+    { artwork_id:2, viewer_id:1 },
+    { artwork_id:4, viewer_id:3 },
+    { artwork_id:4, viewer_id:4 },
+    { artwork_id:4, viewer_id:5 },
+    { artwork_id:4, viewer_id:6 },
+    { artwork_id:4, viewer_id:7 },
+    { artwork_id:5, viewer_id:2 },
+    { artwork_id:5, viewer_id:3 },
+    { artwork_id:5, viewer_id:6 },
+    { artwork_id:5, viewer_id:7 },
+    { artwork_id:6, viewer_id:3 },
+    { artwork_id:6, viewer_id:4 },
+    { artwork_id:6, viewer_id:5 },
+    { artwork_id:6, viewer_id:6 },
+    { artwork_id:6, viewer_id:1 },
+    { artwork_id:3, viewer_id:3 },
+    { artwork_id:7, viewer_id:4 },
+    { artwork_id:8, viewer_id:5 },
+    { artwork_id:9, viewer_id:6 },
+    { artwork_id:10, viewer_id:1 },
+    { artwork_id:11, viewer_id:3 },
+    { artwork_id:11, viewer_id:4 },
+    { artwork_id:11, viewer_id:5 },
+    { artwork_id:12, viewer_id:6 },
+    { artwork_id:12, viewer_id:1 }
+
+
+])
