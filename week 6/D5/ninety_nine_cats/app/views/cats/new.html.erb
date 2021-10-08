@@ -1,3 +1,36 @@
-<form>
-  
+<form action="<%= cats_url %>" method="POST">
+  <label>
+    Name
+    <input type="text" name="cat[name]" value="<%= @cat.name %>"/>
+  </label>
+  <br/>
+  <label>
+    Color
+    <select name="cat[color]">
+        <option disable selected>--</option>
+        <option value="calico">calico</option>
+        <option value="rust">rust</option>
+        <option value="black">black</option>
+        <option value="grey">grey</option>
+        <option value="white">white</option>
+        <option value="brown">brown</option>
+    </select>
+  </label>
+  <br/>
+  <label>
+    Sex
+    <input type="text" name="cat[sex]" value="<%= @cat.sex %>"/>
+  </label>
+  <br/>
+  <label>
+    Birthday
+    <input type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>"/>
+  </label>
+  <br/>
+  <label>
+    Description
+    <input type="textbox" name="cat[description]" value="<%= @cat.description %>"/>
+  </label>
+  <br/>
+  <input type="submit" value="create cat!"/>
 </form>
