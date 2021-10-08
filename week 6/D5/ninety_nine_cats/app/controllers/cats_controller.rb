@@ -4,6 +4,17 @@ class CatsController < ApplicationController
     render :index #index file in cats views
   end
 
-  def show
+  def show #/cats/:id
+    @cat = Cat.find(params[:id])
+    render :show
   end
+
+  def new
+    
+    render :new
+  end
+
+  # def create
+    
+  # end
 end
