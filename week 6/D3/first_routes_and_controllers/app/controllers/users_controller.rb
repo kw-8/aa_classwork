@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # .find etc all activerecord queries
 
     def index
         users = User.all
@@ -15,10 +16,11 @@ class UsersController < ApplicationController
     end
 
     def show
-      user = User.find(params[:id])
+      user = User.find(params[:id]) #ar object
       render json: user
     end
 
+    # rails generates both patch and put for update
     def update
       user = User.find(params[:id])
       if user.update(user_params)
@@ -28,15 +30,19 @@ class UsersController < ApplicationController
       end
     end
 
+    # delete does not do callbacks like dependent destroy
     def destroy
-      user = User.find(params[:id])
+      user = User.find(params[:id]) # from url, nothing to do with table
       user.destroy
       render json: user
     end
 
+    private
     def user_params
       # user - name of hash
       # params - possible keys (variable/col)
       params.require(:user).permit(:username)
     end
+
+    # params is a hash thing
 end
