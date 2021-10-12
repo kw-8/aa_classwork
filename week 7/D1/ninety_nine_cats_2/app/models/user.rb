@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
 
   after_initialize :ensure_session_token
+  attr_reader :password
 
   has_many :cat_rental_requests,
     class_name: 'CatRentalRequest',

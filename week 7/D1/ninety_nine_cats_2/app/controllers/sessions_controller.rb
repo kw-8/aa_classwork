@@ -9,9 +9,11 @@ class SessionsController < ApplicationController
       params[:user][:user_name],
       params[:user][:password]
     )
+    random_thing = params[:random_thing]
+    session[:random_cookie] = random_thing
     if @user.nil?
       # pass errors into html
-      flash.now[:errors] = ['invalid username or password']
+      # flash.now[:errors] = ['invalid username or password']
       render :new
     else
       user.reset_session_token!

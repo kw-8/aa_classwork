@@ -1,5 +1,6 @@
 class CatsController < ApplicationController
   def index
+    @random_cookie = session[:random_cookie]
     @cats = Cat.all
     render :index
   end
