@@ -1,0 +1,4 @@
+temp/
+vendor/
+Gemfile.lock
+.byebug_history
