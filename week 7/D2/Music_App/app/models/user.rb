@@ -5,6 +5,7 @@ class User < ApplicationRecord
   #after_initialization; only when saving
   before_validation :ensure_session_token
 
+  #only in object, not db
   attr_reader :password
 
   def self.find_by_credentials(email, password)
