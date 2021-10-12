@@ -7,7 +7,13 @@ class CatRentalRequest < ApplicationRecord
   validate :start_must_come_before_end
   validate :does_not_overlap_approved_request
 
-  belongs_to :cat
+  belongs_to :cat,
+    class_name: 'Cat',
+    foreign_key: :cat_id
+
+  belongs_to :renter,
+    class_name: 'User',
+    foreign_key: :renter_id
 
   after_initialize :assign_pending_status
 
