@@ -32,10 +32,11 @@
 
     > li {
       padding: 2px;
+      // border-right: 1px solid lightgray;
     }
 
     > li:last-of-type {
-  
+      // border-right: none;
     }
   }
   

@@ -1,11 +1,22 @@
-
 header {
 	font: sans-serif;
+
+  div {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    font-family: $sans-serif;
+  }
 	
-	div > ul{ 
+	div > ul{
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+
+    position: relative;
+    justify-content: center;
 	}
 
 	li {
@@ -31,15 +42,32 @@ header {
 	position: relative;
 }
 
+
+.current-nav {
+  > li {
+    margin: 0;
+    padding: 10px;
+    border-right: 1px solid lightgray;
+    margin-bottom: 3px;
+  }
+
+  > li:last-of-type { border-right: none; }
+
+  border-bottom: 3px solid black;
+}
+
 .language-nav {
-	position: relative;
-	top: -10px;
-	left: calc(50% - (177.78px/2));
+	top: -1.5em;
+	// left: calc(50% - (177.78px/2));
 	background: white;
 	border: 1px solid $light-gray;
 	border-bottom: none;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
+  width: fit-content;
+  height: 1.5em;
+  margin-right: auto; // these two lines center
+  margin-left: auto;
 
 	a {
 		margin: 0 5px;
@@ -48,10 +76,24 @@ header {
 		font-size: 10px;
 		color: $dark-gray;
 	}
-
+  
 	ul {
-		display: flex;
+    display: flex;
 	}
+}
+
+i {
+  margin-right: 5px;
+}
+
+strong {
+  color: green;
+}
+
+.sections-nav {
+  top: 3.5em;
+  border-bottom: 1px solid $light-gray;
+  .underline{text-decoration: underline;}
 }
 
 .logo {
@@ -89,11 +131,4 @@ header {
 		margin-right: 10px;
 	}
 
-	i {
-		margin-right: 5px;
-	}
-
-	strong {
-		color: green;
-	}
 }
