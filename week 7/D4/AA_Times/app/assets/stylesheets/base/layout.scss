@@ -1,0 +1,71 @@
+/* Define application-wide selectors here!*/
+
+.main-nav {
+  border-bottom: lightgrey solid 1px;
+}
+
+html {
+	position: relative;
+	height: 100%;
+}
+
+body {
+	width: 80%;
+	margin: 0 auto;
+	font-family: $serif;
+	font-size: 12px;
+}
+
+.blue-btn {
+	background-color: #006fa7;
+	border-color: darkslategrey;
+	color: white;
+	font-weight: bold;
+	padding: 4px;
+	border-radius: 3px;
+	transition: 0.3s;
+	font-family: sans-serif;
+	// text-transform:
+	font-size: 10px;
+	text-align: center;
+}
+
+.blue-btn:hover {
+	background-color: rgb(61, 82, 139);
+	border-color: darkslateblue;
+}
+
+#sections-sidebar-btn,
+#search-modal-btn,
+#settings-button {
+  background-color: white;
+  margin: 4px;
+	border-radius: 3px;
+	transition: 0.3s;
+}
+
+#sections-sidebar-btn:hover,
+#search-modal-btn:hover,
+#settings-button:hover {
+  background-color: lightgray;
+}
+
+/*
+	Header Rules
+*/
+
+hr {
+	border: 0;
+	height: 1px;
+	background-color: $light-gray;
+}
+
+.hr-top, .hr-bottom {
+	width: 100%;
+	margin: 0;
+}
+
+.hr-top {
+	height: 2px;
+	margin-bottom: 1px;
+}
