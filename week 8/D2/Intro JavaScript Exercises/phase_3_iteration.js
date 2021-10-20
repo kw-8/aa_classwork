@@ -1,6 +1,6 @@
 Array.prototype.bubbleSort = function(cb){
   let sorted = false;
-   
+  
   while(!sorted){
     sorted = true; 
     for (i=0;i < this.length - 1; i++){
