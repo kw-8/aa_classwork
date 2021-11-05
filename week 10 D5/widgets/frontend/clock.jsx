@@ -21,9 +21,12 @@ export default class Clock extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="clock">
         <h1>clock</h1>
         <p>{this.state.time.getHours()}:{this.state.time.getMinutes()}:{this.state.time.getSeconds()}</p>
+        <br/>
+        <h1>time</h1>
+        <p>{this.state.time.getDay()} {this.state.time.getMonth()} {this.state.time.getDate()} {this.state.time.getFullYear()}</p>
       </div>
     );
   }
