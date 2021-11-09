@@ -17,11 +17,28 @@
   <link rel="stylesheet" href="css/10-posts.css" type="text/css">
   <link rel="stylesheet" href="css/11-icons.css" type="text/css">
   <link rel="stylesheet" href="css/12-modal.css" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    $(function () {
+
+      $("body").on("click", ".js-modal-open", function (event) {
+        event.preventDefault();
+        $(".modal").addClass("is-open");
+      });
+
+      $("body").on("click", ".js-modal-close", function (event) {
+        event.preventDefault();
+        $(".modal").removeClass("is-open");
+      });
+
+    });
+  </script>
 </head>
 <body>
 
   <header class="header">
-    <nav class="header-nav">
+    <nav class="header-nav js-modal-open">
 
       <h1 class="header-logo">
         <a href="#">App Academy Friends</a>
@@ -231,6 +248,26 @@
     </ul>
 
   </footer>
+
+
+  <div class="modal">
+    <section class="modal-screen js-modal-close"></section>
+    <section class="modal-form">
+      <h1>Welcome! <span class="close-button js-modal-close">&times;</span></h1>
+      <p>Please sign in to continue</p>
+      <label for="form-email">Email</label>
+      <input id="form-email" type="text" value="">
+      <label for="form-password">Password</label>
+      <input id="form-password" type="password" value="">
+
+      <div>
+        <button class="js-modal-close">Sign in</button>
+        <span class="button-alternative">or <strong class="js-modal-close">Cancel</strong></span>
+      </div>
+    </section>
+  </div>
+
+  
 
 </body>
 </html>
