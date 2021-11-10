@@ -1,5 +1,4 @@
-import RECEIVE_TODOS from '../actions/todo_actions';
-import RECEIVE_TODO from '../actions/todo_actions';
+import {RECEIVE_TODOS, RECEIVE_TODO} from '../actions/todo_actions';
 import configureStore from '../store/store';
 
 
@@ -25,27 +24,16 @@ const todosReducer = (state={}, action) => {
 
   switch(action.type) {
     case RECEIVE_TODOS:
-      // console.log(store);
-      // return {"icecream":"vanilla"}
-    // let todoR = {};
-    action.todos.forEach( ele => {
-      nextState[ele.id] = ele.title 
-    })
-    //   const store = configureStore(preloadedState);
-    //   window.store = store;
-      // nextState[action.tea.id] = action.todos;
-      // return nextState;
-    case RECEIVE_TODO:
-      action.todos.forEach(ele => {
-        nextState[ele.id] = ele.title
+      console.log("hello")
+      action.todos.forEach( ele => {
+        nextState[ele.id] = ele 
       })
-      nextState[action.tea.id] = action.todos;
       return nextState;
-      // console.log(store);
-      // return { "icecream": "chocolate" }
+    case RECEIVE_TODO:
+      nextState[action.todo.id] = action.todo;
+      return nextState;
     default:
       return state;
-      // return {"banana":"bread"}
   }
 
 }

@@ -4,14 +4,14 @@ export const RECEIVE_TODO = 'RECEIVE_TODO';
 export const receiveTodos = (todos) => ({
   
     type: RECEIVE_TODOS,
-    todos, // an array of todos
+    todos // an array of todos
   
 })
 
 export const receiveTodo = (todo) => ({
   
     type: RECEIVE_TODO,
-    todo,
+    todo
   
 })
 
