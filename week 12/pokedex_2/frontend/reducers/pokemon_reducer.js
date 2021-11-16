@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_POKEMON } from './../actions/pokemon_actions';
+import { RECEIVE_ALL_POKEMON, RECEIVE_ONE_POKEMON } from './../actions/pokemon_actions';
 
 
 const pokemonReducer = (state = {}, action) => {
@@ -9,7 +9,8 @@ const pokemonReducer = (state = {}, action) => {
   case RECEIVE_ONE_POKEMON:
     let newState = Object.assign({}, state);
     // {entities: {pokemon: {1:{}, 2:{},..}}}
-    newState.pokemon[action.pokemon]
+    newState[action.pokemon.id] = action.pokemon;
+    return newState; // contains stuff from jbuilder
   default:
     return state;
   }

@@ -8,10 +8,10 @@ export const receiveAllPokemon = (pokemon) => ({
   pokemon
 })
 
-export const receiveOnePokemon = (pokemon) => ({
+export const receiveOnePokemon = ({pokemon, items, moves}) => ({
   type: RECEIVE_ONE_POKEMON,
-  pokemon
-})
+  pokemon, items, moves
+}) // pokemon: pokemon
 
 export const requestAllPokemon = () => (dispatch) => (
   APIUtil.fetchAllPokemon()
