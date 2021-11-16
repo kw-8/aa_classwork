@@ -8,10 +8,13 @@ export const receiveAllPokemon = (pokemon) => ({
   pokemon
 })
 
-export const receiveOnePokemon = ({pokemon, items, moves}) => ({
-  type: RECEIVE_ONE_POKEMON,
-  pokemon, items, moves
-}) // pokemon: pokemon
+export const receiveOnePokemon = (payload) => {
+  console.log(payload)
+  return {
+    type: RECEIVE_ONE_POKEMON,
+    payload
+  }
+}
 
 export const requestAllPokemon = () => (dispatch) => (
   APIUtil.fetchAllPokemon()
@@ -20,5 +23,5 @@ export const requestAllPokemon = () => (dispatch) => (
 
 export const requestOnePokemon = (id) => (dispatch) => (
   APIUtil.fetchOnePokemon(id)
-    .then(pokemon => dispatch(receiveOnePokemon(pokemon)))
+    .then(jbuilderObject => dispatch(receiveOnePokemon(jbuilderObject)))
 )

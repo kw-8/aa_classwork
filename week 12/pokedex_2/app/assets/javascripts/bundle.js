@@ -111,18 +111,13 @@ var receiveAllPokemon = function receiveAllPokemon(pokemon) {
     pokemon: pokemon
   };
 };
-var receiveOnePokemon = function receiveOnePokemon(_ref) {
-  var pokemon = _ref.pokemon,
-      items = _ref.items,
-      moves = _ref.moves;
+var receiveOnePokemon = function receiveOnePokemon(payload) {
+  console.log(payload);
   return {
     type: RECEIVE_ONE_POKEMON,
-    pokemon: pokemon,
-    items: items,
-    moves: moves
+    payload: payload
   };
-}; // pokemon: pokemon
-
+};
 var requestAllPokemon = function requestAllPokemon() {
   return function (dispatch) {
     return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllPokemon"]().then(function (pokemon) {
@@ -132,8 +127,8 @@ var requestAllPokemon = function requestAllPokemon() {
 };
 var requestOnePokemon = function requestOnePokemon(id) {
   return function (dispatch) {
-    return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchOnePokemon"](id).then(function (pokemon) {
-      return dispatch(receiveOnePokemon(pokemon));
+    return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchOnePokemon"](id).then(function (jbuilderObject) {
+      return dispatch(receiveOnePokemon(jbuilderObject));
     });
   };
 };
@@ -279,9 +274,13 @@ var PokemonIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PokemonIndex);
 
   function PokemonIndex(props) {
+    var _this;
+
     _classCallCheck(this, PokemonIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    console.log(props);
+    return _this;
   }
 
   _createClass(PokemonIndex, [{
@@ -509,12 +508,11 @@ __webpack_require__.r(__webpack_exports__);
 var itemsReducer = function itemsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  console.log(action.items);
   Object.freeze(state);
 
   switch (action.type) {
     case _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_POKEMON"]:
-      return action.items;
+      return action.payload.items;
 
     default:
       return state;
@@ -544,7 +542,7 @@ var movesReducer = function movesReducer() {
 
   switch (action.type) {
     case _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_POKEMON"]:
-      return action.moves;
+      return action.payload.moves;
 
     default:
       return state;
@@ -579,7 +577,7 @@ var pokemonReducer = function pokemonReducer() {
     case _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ONE_POKEMON"]:
       var newState = Object.assign({}, state); // {entities: {pokemon: {1:{}, 2:{},..}}}
 
-      newState[action.pokemon.id] = action.pokemon;
+      newState[action.payload.pokemon.id] = action.payload.pokemon;
       return newState;
     // contains stuff from jbuilder
 
@@ -603,10 +601,13 @@ var pokemonReducer = function pokemonReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
+/* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
+
 
 
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -616,15 +617,38 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectAllPokemon */
+/*! exports provided: selectAllPokemon, selectOnePokemon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllPokemon", function() { return selectAllPokemon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectOnePokemon", function() { return selectOnePokemon; });
 var selectAllPokemon = function selectAllPokemon(state) {
   return Object.values(state.entities.pokemon);
 };
+var selectOnePokemon = function selectOnePokemon(state, id) {
+  return Object.values(state.entities.pokemon[id]);
+};
+
+/***/ }),
+
+/***/ "./frontend/reducers/ui_reducer.js":
+/*!*****************************************!*\
+  !*** ./frontend/reducers/ui_reducer.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var uiReducer = function uiReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  return state;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (uiReducer);
 
 /***/ }),
 

@@ -9,7 +9,7 @@ const pokemonReducer = (state = {}, action) => {
   case RECEIVE_ONE_POKEMON:
     let newState = Object.assign({}, state);
     // {entities: {pokemon: {1:{}, 2:{},..}}}
-    newState[action.pokemon.id] = action.pokemon;
+    newState[action.payload.pokemon.id] = action.payload.pokemon;
     return newState; // contains stuff from jbuilder
   default:
     return state;
