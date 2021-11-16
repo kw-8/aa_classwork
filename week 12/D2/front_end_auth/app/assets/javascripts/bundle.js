@@ -146,6 +146,64 @@ var unLikeChirp = exports.unLikeChirp = function unLikeChirp(id) {
 
 /***/ }),
 
+/***/ "./frontend/actions/session.js":
+/*!*************************************!*\
+  !*** ./frontend/actions/session.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.logoutUser = exports.loginUser = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
+
+var _session = __webpack_require__(/*! ../utils/session */ "./frontend/utils/session.js");
+
+var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+var LOGOUT_CURRENT_USER = exports.LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+
+var receiveCurrentUser = function receiveCurrentUser(user) {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    user: user
+  };
+};
+var logoutCurrentUser = function logoutCurrentUser() {
+  return {
+    type: LOGOUT_CURRENT_USER
+  };
+};
+
+var createNewUser = exports.createNewUser = function createNewUser(formUser) {
+  return function (dispatch) {
+    return (0, _session.postUser)(formUser).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+};
+
+var loginUser = exports.loginUser = function loginUser(formUser) {
+  return function (dispatch) {
+    return (0, _session.postSession)(formUser).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+};
+
+var logoutUser = exports.logoutUser = function logoutUser() {
+  return function (dispatch) {
+    return (0, _session.deleteSession)().then(function () {
+      return dispatch(logoutCurrentUser());
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/bluebird.jsx":
 /*!*******************************!*\
   !*** ./frontend/bluebird.jsx ***!
@@ -790,11 +848,53 @@ var _entities = __webpack_require__(/*! ./entities */ "./frontend/reducers/entit
 
 var _entities2 = _interopRequireDefault(_entities);
 
+var _session = __webpack_require__(/*! ./session */ "./frontend/reducers/session.js");
+
+var _session2 = _interopRequireDefault(_session);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  entities: _entities2.default
+  entities: _entities2.default,
+  session: _session2.default
 });
+
+/***/ }),
+
+/***/ "./frontend/reducers/session.js":
+/*!**************************************!*\
+  !*** ./frontend/reducers/session.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _session = __webpack_require__(/*! ../actions/session */ "./frontend/actions/session.js");
+
+var _nullSession = {
+  currentUser: null
+};
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullSession;
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case _session.RECEIVE_CURRENT_USER:
+      return Object.assign({}, { currentUser: action.user });
+    case _session.LOGOUT_CURRENT_USER:
+      return _nullSession;
+    default:
+      break;
+  }
+};
 
 /***/ }),
 
@@ -899,6 +999,44 @@ var deleteLikeFromChirp = exports.deleteLikeFromChirp = function deleteLikeFromC
     url: '/api/likes',
     method: 'DELETE',
     data: { id: id }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/utils/session.js":
+/*!***********************************!*\
+  !*** ./frontend/utils/session.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var postUser = exports.postUser = function postUser(user) {
+  $.ajax({
+    url: '/api/users',
+    method: 'post',
+    data: { user: user } // returned with key user
+  });
+};
+
+var postSession = exports.postSession = function postSession(user) {
+  $.ajax({
+    url: '/api/session',
+    method: 'post',
+    data: { user: user }
+  });
+};
+
+var deleteSession = exports.deleteSession = function deleteSession() {
+  $.ajax({
+    url: '/api/session',
+    method: 'delete' // no data necessary
   });
 };
 

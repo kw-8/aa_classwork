@@ -1,5 +1,3 @@
-import { $CombinedState } from "redux"
-
 export const postUser = user => {
   $.ajax({
     url: '/api/users',
@@ -8,15 +6,15 @@ export const postUser = user => {
   })
 }
 
-export const postSession = session => {
+export const postSession = user => {
   $.ajax({
     url: '/api/session',
     method: 'post',
-    data: { user }, // returned with key user
+    data: { user },
   })
 }
 
-export const deleteSession = session => {
+export const deleteSession = () => {
   $.ajax({
     url: '/api/session',
     method: 'delete', // no data necessary
