@@ -3,18 +3,21 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by_credentials(params[:user][:username],params[:user][:password])
     if @user
       login(@user)
+      render json: {test:'successful login'}
       # render something
     else
+      render json: {test:'bad login'}
       # render errors
     end
   end
 
   def destroy
+    @user = current_user
     if logged_in?
       logout
-      render {}
+      render json: {test:'successful logout'}
     else
-      render json status: 404 #missing error component
+      render json: {test:'bad logout'}
     end
   end
 end
